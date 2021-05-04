@@ -29,7 +29,11 @@ def append_course(id, units, course, prereqs, semester, isGIR, isHASS, rating):
     Semester.append(semester)
     IsGIR.append(isGIR)
     IsHASS.append(isHASS)
-    Rating.append(rating)
+    # rating 10 for 15.053 :)
+    if id == "15.053":
+        Rating.append(10)
+    else:
+        Rating.append(rating)
 
 
 # adding HASS and GIR courses
@@ -44,7 +48,7 @@ for i in range(1, 7):
 
 # possible courses
 options = ["6.0001", "6.0002", "6.004", "6.006", "6.009", "6.034", "6.041", "6.042", "6.046",
-           "15.276", "15.312", "15.053", "6.041", "15.075", "15.780", "6.036", "15.093", "15.0251", "15.0341", "15.501", "18.06", "18.03", "18.04", "18.200", "18.300", "18.600", "18.204", "18.303", "18.330"]
+           "15.276", "15.312", "15.053", "15.075", "15.780", "6.036", "15.093", "15.0251", "15.0341", "15.501", "18.06", "18.03", "18.04", "18.200A", "18.300", "18.600", "18.204", "18.303", "18.330"]
 
 # cleaning data from the API
 for course in (c):
@@ -62,7 +66,6 @@ for course in (c2):
 courses = pd.DataFrame({'ID': ID, "Units": Units, "Course": Course,
                         "Prereqs": Prereqs, "Semester": Semester, "IsGIR": IsGIR, "IsHASS": IsHASS, "Rating": Rating})
 courses.to_csv("courses.csv")
-
 
 # add a column for time for scheduling the current semester
 # fetch rating from fireroad API or randomly generate utility
